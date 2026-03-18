@@ -11,6 +11,7 @@ Quick Reference
 - ``xcp-fetch-a2l`` – Download A2L from ECU
 - ``xcp-profile`` – Create/convert configs
 - ``xcp-examples`` – Copy example scripts
+- ``xcp-discovery`` – Discover XCP-on-Ethernet slaves (multicast)
 - ``xmraw-converter`` – Convert measurement data
 - ``pyxcp-probe-can-drivers`` – List CAN drivers
 - (extra) ``xcp-daq-recorder`` – Automated DAQ recording from JSON config
@@ -96,6 +97,26 @@ Subcommands:
 xcp-examples
 ^^^^^^^^^^^^
 List and copy bundled example scripts.
+
+xcp-discovery
+^^^^^^^^^^^^^
+Discover Ethernet slaves via multicast GET_SLAVE_ID / GET_SLAVE_ID_EXTENDED and optionally assign IPv4 by MAC.
+
+Usage::
+
+   xcp-discovery [OPTIONS]
+
+Common options:
+- ``--extended`` – send GET_SLAVE_ID_EXTENDED
+- ``--set-ip <MAC> <IP>`` – assign an IPv4 to the given MAC
+- ``--dest-address/--dest-port`` – override multicast destination
+- ``--response-address/--response-port`` – override response group
+
+Example (multicast scan with extended info)::
+
+   xcp-discovery --extended --timeout 5
+
+Typical output includes the discovered IP/port, resource flags, and MAC for each responder.
 
 xmraw-converter
 ^^^^^^^^^^^^^^^

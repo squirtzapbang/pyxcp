@@ -1714,7 +1714,7 @@ class Master:
     def getSlaveIdEthernet(
         self,
         response_port: int = 5556,
-        response_address: str = "239.255.0.0",
+        response_address: str = "239.255.2.1",
         timeout: float = 0.3,
         ip_version: int = 0,
         dest_address: str = "239.255.0.0",

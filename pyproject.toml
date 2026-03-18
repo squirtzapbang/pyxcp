@@ -112,6 +112,7 @@ pydantic = ">=2.5,<3"
 [tool.poetry.scripts]
 pyxcp-probe-can-drivers = "pyxcp.scripts.pyxcp_probe_can_drivers:main"
 xcp-id-scanner = "pyxcp.scripts.xcp_id_scanner:main"
+xcp-discovery = "pyxcp.scripts.xcp_discovery:main"
 xcp-fetch-a2l = "pyxcp.scripts.xcp_fetch_a2l:main"
 xcp-info = "pyxcp.scripts.xcp_info:main"
 xcp-profile = "pyxcp.scripts.xcp_profile:main"

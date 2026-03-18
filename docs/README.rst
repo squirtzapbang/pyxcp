@@ -92,6 +92,7 @@ Installed entry points (see pyproject.toml):
 - xcp-fetch-a2l — retrieve A2L from target (if supported)
 - xcp-profile — generate/convert config files
 - xcp-examples — launch assorted demos/examples
+- xcp-discovery — multicast discovery for XCP on Ethernet (with optional SET_SLAVE_IP_ADDRESS)
 - xmraw-converter — convert recorder .xmraw data
 - pyxcp-probe-can-drivers — list available CAN interfaces
 

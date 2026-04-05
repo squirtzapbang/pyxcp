@@ -73,6 +73,32 @@ Minimal example using the built-in argument parser and context manager:
        print(x.slaveProperties)
        x.disconnect()
 
+Async facade for awaitable command handling plus DAQ/event streaming:
+
+.. code:: python
+
+   import asyncio
+
+   from pyxcp.cmdline import ArgumentParser
+   from pyxcp.transport import AsyncPolicyAdapter
+
+
+   async def main():
+       ap = ArgumentParser(description="pyXCP async example")
+       policy = AsyncPolicyAdapter()
+
+       async with ap.async_run(policy=policy) as x:
+           await x.connect()
+           status = await x.getStatus()
+           print(status)
+
+           daq_frames = x.subscribe_daq()
+           frame = await daq_frames.get()
+           print(frame.category, frame.counter, frame.payload.hex())
+
+
+   asyncio.run(main())
+
 Configuration
 ~~~~~~~~~~~~~
 

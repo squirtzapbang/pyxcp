@@ -11,7 +11,9 @@ from rich.traceback import install as tb_install
 pretty.install()
 
 from .master import Master  # noqa: F401, E402
+from .master.async_master import AsyncMaster  # noqa: F401, E402
 from .transport import Can, Eth, SxI, Usb  # noqa: F401, E402
+from .transport.async_policy import AsyncPolicyAdapter, AsyncFrameSubscription, FrameNotification  # noqa: F401, E402
 
 
 console = Console()

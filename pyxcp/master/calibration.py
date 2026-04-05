@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 from typing import Any, Dict, Optional
 
-from pyxcp.master.errorhandler import wrapped
 
 # Constants for Page Management
 CAL_PAGE_MODE_ECU = 0x01
@@ -56,7 +55,6 @@ class Calibration:
     def __repr__(self):
         return f"Calibration(segments={len(self.segments)}, freeze_supported={self.freeze_supported})"
 
-    @wrapped
     def refresh(self):
         """Discovers the logical memory layout of the slave (segments and pages)."""
         try:
@@ -122,7 +120,6 @@ class Calibration:
         if not self._initialized:
             self.refresh()
 
-    @wrapped
     def set_page(self, segment: int, page: int, mode: int = CAL_PAGE_MODE_ECU | CAL_PAGE_MODE_XCP):
         """Set active page for a segment.
 
@@ -152,7 +149,6 @@ class Calibration:
         """Convenience method to set the XCP page."""
         self.set_page(segment, page, CAL_PAGE_MODE_XCP)
 
-    @wrapped
     def set_all_pages(self, page: int, mode: int = CAL_PAGE_MODE_ECU | CAL_PAGE_MODE_XCP):
         """Set active page for all segments.
 
@@ -171,7 +167,6 @@ class Calibration:
         """Legacy alias for set_all_pages."""
         self.set_all_pages(page, mode)
 
-    @wrapped
     def get_page(self, segment: int, mode: int = CAL_PAGE_MODE_XCP) -> int:
         """Get current active page for a segment.
 
@@ -190,7 +185,6 @@ class Calibration:
         """
         return self.master.getCalPage(mode, segment)
 
-    @wrapped
     def get_current_config(self) -> Dict[int, Dict[str, int]]:
         """Returns the current active pages for all discovered segments.
 
@@ -211,12 +205,10 @@ class Calibration:
                 pass
         return config
 
-    @wrapped
     def copy_page(self, src_segment: int, src_page: int, dst_segment: int, dst_page: int):
         """Copy data from one page to another."""
         self.master.copyCalPage(src_segment, src_page, dst_segment, dst_page)
 
-    @wrapped
     def copy_segment(self, src_segment: int, dst_segment: int):
         """Copies all pages from one segment to another (where page numbers match)."""
         self._check_initialized()
@@ -227,7 +219,6 @@ class Calibration:
             if page_nr in self.segments[dst_segment].pages:
                 self.copy_page(src_segment, page_nr, dst_segment, page_nr)
 
-    @wrapped
     def set_freeze_mode(self, segment: int, enabled: bool):
         """Enable or disable freeze mode for a segment."""
         self._check_initialized()
@@ -239,13 +230,11 @@ class Calibration:
         if segment in self.segments:
             self.segments[segment].mode = mode
 
-    @wrapped
     def is_frozen(self, segment: int) -> bool:
         """Check if a segment is in freeze mode."""
         mode = self.master.getSegmentMode(segment)
         return bool(mode & 0x01)
 
-    @wrapped
     def save_all(self):
         """Request the slave to save calibration data into non-volatile memory.
 

@@ -7,6 +7,7 @@ from .transport_ext import (
     NoOpPolicy,  # noqa: F401
     StdoutPolicy,  # noqa: F401
 )
+from .async_policy import AsyncPolicyAdapter, AsyncFrameSubscription, FrameNotification, SubscriptionClosedError  # noqa: F401
 
 from .can import Can  # noqa: F401
 from .eth import Eth  # noqa: F401

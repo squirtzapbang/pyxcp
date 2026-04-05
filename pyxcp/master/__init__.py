@@ -8,4 +8,5 @@
 """
 
 from .master import Master  # noqa: F401
+from .async_master import AsyncMaster  # noqa: F401
 from .calibration import Calibration  # noqa: F401

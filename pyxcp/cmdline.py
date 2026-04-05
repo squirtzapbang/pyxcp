@@ -64,6 +64,15 @@ class ArgumentParser:
 
         return master
 
+    def async_run(self, policy=None, transport_layer_interface=None, executor=None):
+        """Create and configure an asynchronous master adapter."""
+        from pyxcp.master.async_master import AsyncMaster
+
+        return AsyncMaster(
+            self.run(policy=policy, transport_layer_interface=transport_layer_interface),
+            executor=executor,
+        )
+
     @property
     def parser(self):
         return self._parser.parser

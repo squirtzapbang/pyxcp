@@ -1480,10 +1480,7 @@ class Master:
         pageNumber : int
         """
         response = self.transport.request(types.Command.GET_PAGE_INFO, 0, segment_number, page_number)
-        return (
-            types.PageProperties.parse(bytes([response[0]]), byteOrder=self.slaveProperties.byteOrder),
-            response[1],
-        )
+        return types.GetPageInfoResponse.parse(response, byteOrder=self.slaveProperties.byteOrder)
 
     @wrapped
     def setSegmentMode(self, mode: int, segment_number: int):

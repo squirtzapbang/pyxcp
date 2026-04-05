@@ -18,7 +18,7 @@ from pyxcp.config import create_application_from_config, set_application
 from pyxcp.types import XcpResponseError, XcpTimeoutError
 
 # === Configuration ===
-ECU_IP = "192.168.1.100"  # Replace with your ECU IP
+ECU_IP = "192.168.0.53"  # Replace with your ECU IP
 ECU_PORT = 5555  # Standard XCP port
 PROTOCOL = "TCP"  # or "UDP"
 TIMEOUT = 2.0  # seconds

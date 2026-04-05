@@ -538,6 +538,11 @@ PageProperties = BitStruct(
     "ecuAccessWithoutXcp" / Flag,
 )
 
+GetPageInfoResponse = Struct(
+    "properties" / PageProperties,
+    "initSegment" / Int8ul,
+)
+
 DaqProperties = BitStruct(
     "overloadEvent" / Flag,
     "overloadMsb" / Flag,

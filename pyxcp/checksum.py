@@ -8,6 +8,8 @@ import enum
 import struct
 import zlib
 
+from pyxcp.types import BuildChecksumResponse
+
 
 class Algorithm(enum.IntEnum):
     """Enumerates available checksum algorithms"""
@@ -730,3 +732,14 @@ def check(frame: bytes, algo: str):
         return fun(frame)
     else:
         raise NotImplementedError(f"Invalid algorithm '{algo:d}'")
+
+
+calculate_checksum = check
+
+
+def validate_checksum(frame: bytes, slave_cs: BuildChecksumResponse) -> bool:
+    """Compare master- and slave-side checksums."""
+    if not (hasattr(slave_cs, "checksumType") and hasattr(slave_cs, "checksum")):
+        raise TypeError("paramter `cs` shall be the return value of buldChecksum().")
+    master_cs = calculate_checksum(frame, slave_cs.checksumType)
+    return slave_cs.checksum == master_cs
